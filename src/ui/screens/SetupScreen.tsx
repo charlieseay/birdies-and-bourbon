@@ -12,9 +12,10 @@ import { generateUUID } from '../../utils/uuid';
 
 interface SetupScreenProps {
   onStartRound: (roundState: RoundState) => void;
+  onCustomGame?: () => void;
 }
 
-export function SetupScreen({ onStartRound }: SetupScreenProps) {
+export function SetupScreen({ onStartRound, onCustomGame }: SetupScreenProps) {
   const [playerNames, setPlayerNames] = useState<string[]>(['', '', '', '']);
   const [selectedDeckId, setSelectedDeckId] = useState('retribution-deck');
   const [skinsValue, setSkinsValue] = useState('5');
@@ -117,6 +118,12 @@ export function SetupScreen({ onStartRound }: SetupScreenProps) {
       <TouchableOpacity style={styles.startButton} onPress={handleStartRound}>
         <Text style={styles.startButtonText}>START ROUND</Text>
       </TouchableOpacity>
+
+      {onCustomGame && (
+        <TouchableOpacity style={styles.customButton} onPress={onCustomGame}>
+          <Text style={styles.customButtonText}>🎨 CREATE CUSTOM GAME</Text>
+        </TouchableOpacity>
+      )}
     </ScrollView>
   );
 }
@@ -195,5 +202,17 @@ const styles = StyleSheet.create({
     ...theme.typography.button,
     color: theme.colors.background,
     fontWeight: '700',
+  },
+  customButton: {
+    backgroundColor: theme.colors.neonPurple,
+    borderRadius: 8,
+    padding: theme.spacing.md,
+    alignItems: 'center',
+    marginTop: theme.spacing.md,
+  },
+  customButtonText: {
+    ...theme.typography.body,
+    color: theme.colors.background,
+    fontWeight: '600',
   },
 });

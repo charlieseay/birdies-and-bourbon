@@ -10,8 +10,10 @@ import { RoundCoordinator, AppScreenState } from './src/state/RoundCoordinator';
 import { SetupScreen } from './src/ui/screens/SetupScreen';
 import { ActiveRoundScreen } from './src/ui/screens/ActiveRoundScreen';
 import { SettlementScreen } from './src/ui/screens/SettlementScreen';
+import { CustomGameScreen } from './src/ui/screens/CustomGameScreen';
 import { theme } from './src/ui/theme';
-import { RoundState } from './src/types/game';
+import { RoundState, GameDeck } from './src/types/game';
+import { RoundRepository } from './src/storage/RoundRepository';
 
 const coordinator = new RoundCoordinator();
 
@@ -66,6 +68,9 @@ export default function App() {
               type: 'START_ROUND',
               roundState,
             });
+          }}
+          onCustomGame={() => {
+            setScreenState({ screen: 'customDeck' });
           }}
         />
       )}
@@ -122,6 +127,17 @@ export default function App() {
           roundState={screenState.roundState}
           ledger={screenState.ledger}
           onExitToSetup={async () => {
+            await coordinator.handleEvent({ type: 'EXIT_TO_SETUP' });
+          }}
+        />
+      )}
+
+      {screenState.screen === 'customDeck' && (
+        <CustomGameScreen
+          onSaveDeck={async (deck: GameDeck) => {
+            await RoundRepository.saveDeck(deck);
+          }}
+          onBack={async () => {
             await coordinator.handleEvent({ type: 'EXIT_TO_SETUP' });
           }}
         />

@@ -93,6 +93,18 @@ export default function App() {
               chipId,
             });
           }}
+          onApplyModifier={async (modifier: any) => {
+            await coordinator.handleEvent({
+              type: 'APPLY_MODIFIER',
+              modifier,
+            });
+          }}
+          onExpireModifier={async (modifierId: string) => {
+            await coordinator.handleEvent({
+              type: 'EXPIRE_MODIFIER',
+              modifierId,
+            });
+          }}
           onAdvanceHole={async () => {
             await coordinator.handleEvent({ type: 'ADVANCE_HOLE' });
           }}

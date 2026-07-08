@@ -9,13 +9,18 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView, Ale
 import { theme } from '../theme';
 import { RoundState, HoleState } from '../../types/game';
 import { ChipTray } from '../components/ChipTray';
+import { CardModifierPanel } from '../components/CardModifierPanel';
+import { QRSyncModal } from '../components/QRSyncModal';
 import { getDefaultDecks } from '../../state/defaultDecks';
+import { generateUUID } from '../../utils/uuid';
 
 interface ActiveRoundScreenProps {
   roundState: RoundState;
   onUpdateScore: (playerId: string, score: number) => void;
   onAssignChip: (chipId: string, playerId: string) => void;
   onRemoveChip: (chipId: string) => void;
+  onApplyModifier: (modifier: any) => void;
+  onExpireModifier: (modifierId: string) => void;
   onAdvanceHole: () => void;
   onGoBackHole: () => void;
   onEndRound: () => void;
@@ -26,20 +31,24 @@ export function ActiveRoundScreen({
   onUpdateScore,
   onAssignChip,
   onRemoveChip,
+  onApplyModifier,
+  onExpireModifier,
   onAdvanceHole,
   onGoBackHole,
   onEndRound,
 }: ActiveRoundScreenProps) {
   const [selectedChipId, setSelectedChipId] = useState<string | null>(null);
+  const [showQRSync, setShowQRSync] = useState(false);
 
   const currentHole = roundState.holes[roundState.currentHoleIndex];
   const playerIds = Object.keys(roundState.players);
   const isLastHole = roundState.currentHoleIndex === roundState.holes.length - 1;
 
-  // Load game deck to get available chips
+  // Load game deck to get available chips and cards
   const decks = getDefaultDecks();
   const gameDeck = decks.find(d => d.id === roundState.config.gameDeckId);
   const availableChips = gameDeck?.chips || [];
+  const availableCards = gameDeck?.cardTemplates || [];
 
   if (!currentHole) {
     return (
@@ -71,6 +80,34 @@ export function ActiveRoundScreen({
     }
   };
 
+  const handlePlayCard = (cardTemplate: any) => {
+    // For single-target cards, prompt for player selection
+    if (cardTemplate.targetVector === 'single' || cardTemplate.targetVector === 'opponent') {
+      Alert.alert(
+        'Play Card',
+        `${cardTemplate.name}\n\nTap a player to apply this card.`,
+        [{ text: 'Cancel' }]
+      );
+      // TODO: Set card selection mode and wait for player tap
+      // For now, just apply to first player as demo
+      const modifier = {
+        ...cardTemplate,
+        id: generateUUID(),
+        isExpired: false,
+        targetPlayerId: playerIds[0],
+      };
+      onApplyModifier(modifier);
+    } else {
+      // All-players cards apply immediately
+      const modifier = {
+        ...cardTemplate,
+        id: generateUUID(),
+        isExpired: false,
+      };
+      onApplyModifier(modifier);
+    }
+  };
+
   const getPlayerChips = (playerId: string) => {
     return Object.entries(currentHole.chipLocations || {})
       .filter(([_, pid]) => pid === playerId)
@@ -80,6 +117,14 @@ export function ActiveRoundScreen({
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Card modifier panel */}
+      <CardModifierPanel
+        activeModifiers={currentHole.activeModifiers || []}
+        availableCards={availableCards}
+        onPlayCard={handlePlayCard}
+        onExpireModifier={onExpireModifier}
+      />
+
       {/* Chip tray */}
       <ChipTray chips={availableChips} onChipPress={handleChipPress} />
 
@@ -92,8 +137,21 @@ export function ActiveRoundScreen({
         <View style={styles.skinsPot}>
           <Text style={styles.skinsPotLabel}>SKINS POT</Text>
           <Text style={styles.skinsPotValue}>${skinsInPot.toFixed(2)}</Text>
+          <TouchableOpacity
+            style={styles.qrButton}
+            onPress={() => setShowQRSync(true)}
+          >
+            <Text style={styles.qrButtonText}>📱 SYNC</Text>
+          </TouchableOpacity>
         </View>
       </View>
+
+      {/* QR Sync Modal */}
+      <QRSyncModal
+        visible={showQRSync}
+        roundState={roundState}
+        onClose={() => setShowQRSync(false)}
+      />
 
       {/* Player scores */}
       <ScrollView style={styles.playersContainer}>
@@ -216,6 +274,18 @@ const styles = StyleSheet.create({
   skinsPotValue: {
     ...theme.typography.heading1,
     color: theme.colors.neonGreen,
+  },
+  qrButton: {
+    backgroundColor: theme.colors.neonCyan,
+    borderRadius: 4,
+    paddingHorizontal: theme.spacing.sm,
+    paddingVertical: 4,
+    marginTop: theme.spacing.xs,
+  },
+  qrButtonText: {
+    ...theme.typography.caption,
+    color: theme.colors.background,
+    fontWeight: '700',
   },
   playersContainer: {
     flex: 1,

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yard Wars - AI-Generated Logo Concepts</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      padding: 40px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .header h1 {
+      font-size: 72px;
+      color: #FF0044;
+      text-shadow: 0 0 40px rgba(255, 0, 68, 0.6);
+      margin-bottom: 15px;
+    }
+    .header p {
+      font-size: 24px;
+      color: #00FF00;
+    }
+    .prompt {
+      background: #1a1a1a;
+      border: 2px solid #333;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 60px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .prompt h3 {
+      color: #00FFFF;
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+    .prompt code {
+      color: #00FF00;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    .concept-card {
+      background: #0a0a0a;
+      border: 3px solid #333;
+      border-radius: 20px;
+      padding: 30px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .concept-card:hover {
+      border-color: #00FF00;
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0, 255, 0, 0.3);
+    }
+    .concept-card.selected {
+      border-color: #FF0044;
+      background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%);
+    }
+    .image-container {
+      background: #000;
+      border-radius: 15px;
+      padding: 40px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+    }
+    .concept-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      image-rendering: -webkit-optimize-contrast;
+    }
+    .concept-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .concept-number {
+      font-size: 32px;
+      font-weight: bold;
+      color: #00FFFF;
+    }
+    .vote-btn {
+      padding: 12px 30px;
+      background: #00FF00;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .vote-btn:hover {
+      background: #00FFFF;
+      transform: scale(1.05);
+    }
+    .vote-btn.voted {
+      background: #FF0044;
+      color: #fff;
+    }
+    .notes {
+      color: #999;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .actions {
+      text-align: center;
+      margin-top: 80px;
+      padding: 60px 40px;
+      background: #1a1a1a;
+      border-radius: 20px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .actions h2 {
+      font-size: 48px;
+      color: #00FF00;
+      margin-bottom: 30px;
+    }
+    .action-btns {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .action-btn {
+      padding: 20px 50px;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .action-btn.primary {
+      background: #FF0044;
+      color: #fff;
+    }
+    .action-btn.primary:hover {
+      background: #00FF00;
+      color: #000;
+      transform: scale(1.1);
+    }
+    .action-btn.secondary {
+      background: #1a1a1a;
+      color: #00FFFF;
+      border: 3px solid #00FFFF;
+    }
+    .action-btn.secondary:hover {
+      background: #00FFFF;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Yard Wars Logo Concepts</h1>
+    <p>AI-Generated with FLUX Pro v1.1</p>
+  </div>
+
+  <div class="prompt">
+    <h3>Generation Prompt:</h3>
+    <code>
+      Mobile app icon design for Yard Wars, tactical shield coat of arms logo,
+      minimalist geometric design, crossed disc golf basket and cornhole board,
+      neon green (#00FF00) glowing lines on pure black (#000000) background,
+      high contrast, OLED optimized, modern esports style, symmetrical composition,
+      sharp angles, vector art style, no text, 1024x1024
+    </code>
+  </div>
+
+  <div class="gallery">
+    <div class="concept-card" data-concept="1">
+      <div class="concept-header">
+        <div class="concept-number">Concept #1</div>
+        <button class="vote-btn" onclick="vote(1)">Vote for This</button>
+      </div>
+      <div class="image-container">
+        <img src="logo-concept-1.jpg" alt="Logo Concept 1">
+      </div>
+      <div class="notes">
+        Clean shield with symmetrical design. Strong geometric shapes with good contrast.
+      </div>
+    </div>
+
+    <div class="concept-card" data-concept="2">
+      <div class="concept-header">
+        <div class="concept-number">Concept #2</div>
+        <button class="vote-btn" onclick="vote(2)">Vote for This</button>
+      </div>
+      <div class="image-container">
+        <img src="logo-concept-2.jpg" alt="Logo Concept 2">
+      </div>
+      <div class="notes">
+        More aggressive angular design. High energy, competitive vibe. Strong neon glow.
+      </div>
+    </div>
+
+    <div class="concept-card" data-concept="3">
+      <div class="concept-header">
+        <div class="concept-number">Concept #3</div>
+        <button class="vote-btn" onclick="vote(3)">Vote for This</button>
+      </div>
+      <div class="image-container">
+        <img src="logo-concept-3.jpg" alt="Logo Concept 3">
+      </div>
+      <div class="notes">
+        Tactical military aesthetic. Sharp angles and crossed elements. Battle-ready look.
+      </div>
+    </div>
+
+    <div class="concept-card" data-concept="4">
+      <div class="concept-header">
+        <div class="concept-number">Concept #4</div>
+        <button class="vote-btn" onclick="vote(4)">Vote for This</button>
+      </div>
+      <div class="image-container">
+        <img src="logo-concept-4.jpg" alt="Logo Concept 4">
+      </div>
+      <div class="notes">
+        Modern esports style. Balanced composition. Professional gaming aesthetic.
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <h2>Next Steps</h2>
+    <div class="action-btns">
+      <button class="action-btn primary" onclick="generateMore()">Generate More Variations</button>
+      <button class="action-btn secondary" onclick="refine()">Refine Selected Concept</button>
+      <button class="action-btn secondary" onclick="tryStyle()">Try Different Style</button>
+    </div>
+  </div>
+
+  <script>
+    let selected = null;
+
+    function vote(num) {
+      // Remove previous selection
+      document.querySelectorAll('.concept-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      document.querySelectorAll('.vote-btn').forEach(btn => {
+        btn.classList.remove('voted');
+        btn.textContent = 'Vote for This';
+      });
+
+      // Mark new selection
+      const card = document.querySelector(`[data-concept="${num}"]`);
+      const btn = card.querySelector('.vote-btn');
+      card.classList.add('selected');
+      btn.classList.add('voted');
+      btn.textContent = '✓ Selected';
+
+      selected = num;
+      console.log('Selected concept:', num);
+    }
+
+    function generateMore() {
+      alert(`Generating 4 more variations...\n\nThis will use the same prompt with different seeds to explore more design directions.`);
+    }
+
+    function refine() {
+      if (!selected) {
+        alert('Please select a concept first by clicking "Vote for This"');
+        return;
+      }
+      alert(`Refining Concept #${selected}...\n\nWill generate higher resolution versions and variations of this specific design.`);
+    }
+
+    function tryStyle() {
+      const styles = [
+        'Cyberpunk neon style',
+        'Minimalist flat design',
+        'Graffiti street art',
+        'Luxury premium badge',
+        'Retro 80s arcade'
+      ];
+      alert(`Available style directions:\n\n${styles.map((s, i) => `${i+1}. ${s}`).join('\n')}\n\nWhich style would you like to try?`);
+    }
+  </script>
+</body>
+</html>

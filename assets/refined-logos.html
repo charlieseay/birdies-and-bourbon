@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yard Wars - Refined Logo Concepts (HD)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      padding: 40px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding-bottom: 30px;
+      border-bottom: 4px solid #FF0044;
+    }
+    .header h1 {
+      font-size: 96px;
+      color: #FF0044;
+      text-shadow: 0 0 60px rgba(255, 0, 68, 0.8);
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+    .header .badge {
+      display: inline-block;
+      padding: 15px 40px;
+      background: #00FF00;
+      color: #000;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+    .header p {
+      font-size: 20px;
+      color: #666;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 1800px;
+      margin: 0 auto 80px;
+    }
+    .logo-card {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      border: 4px solid #333;
+      border-radius: 25px;
+      padding: 40px;
+      transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+    .logo-card:hover {
+      border-color: #00FF00;
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 30px 80px rgba(0, 255, 0, 0.4);
+    }
+    .logo-card.selected {
+      border-color: #FF0044;
+      border-width: 6px;
+      background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%);
+    }
+    .logo-card.selected::before {
+      content: "✓ SELECTED";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #FF0044;
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .image-wrapper {
+      background: #000;
+      border-radius: 20px;
+      padding: 60px;
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .image-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, transparent 0%, #000 80%);
+      pointer-events: none;
+    }
+    .logo-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+    .logo-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logo-number {
+      font-size: 42px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #00FF00, #00FFFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .resolution {
+      font-size: 16px;
+      color: #00FFFF;
+      font-family: 'Courier New', monospace;
+      padding: 8px 16px;
+      background: #0a0a0a;
+      border-radius: 8px;
+      border: 2px solid #00FFFF;
+    }
+    .description {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #999;
+      margin-bottom: 25px;
+    }
+    .select-btn {
+      width: 100%;
+      padding: 20px;
+      background: #00FF00;
+      color: #000;
+      border: none;
+      border-radius: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .select-btn:hover {
+      background: #00FFFF;
+      transform: scale(1.05);
+    }
+    .logo-card.selected .select-btn {
+      background: #FF0044;
+      color: #fff;
+    }
+    .actions {
+      text-align: center;
+      padding: 80px 40px;
+      background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%);
+      border: 4px solid #FF0044;
+      border-radius: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .actions h2 {
+      font-size: 56px;
+      color: #FF0044;
+      margin-bottom: 20px;
+    }
+    .actions p {
+      font-size: 20px;
+      color: #999;
+      margin-bottom: 40px;
+    }
+    .action-btns {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .action-btn {
+      padding: 25px 60px;
+      font-size: 22px;
+      font-weight: bold;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .action-btn.export {
+      background: #00FF00;
+      color: #000;
+    }
+    .action-btn.export:hover {
+      background: #00FFFF;
+      transform: scale(1.1);
+    }
+    .action-btn.more {
+      background: #1a1a1a;
+      color: #00FFFF;
+      border: 4px solid #00FFFF;
+    }
+    .action-btn.more:hover {
+      background: #00FFFF;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>YARD WARS</h1>
+    <div class="badge">Refined HD Logos • 1024×1024</div>
+    <p>Based on Concept #3 - Tactical Military Style</p>
+  </div>
+
+  <div class="gallery">
+    <div class="logo-card" data-logo="1" onclick="select(1)">
+      <div class="logo-info">
+        <div class="logo-number">Refined #1</div>
+        <div class="resolution">1024×1024 HD</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="refined-1.jpg" alt="Refined Logo 1">
+      </div>
+      <div class="description">
+        Sharp geometric shield with aggressive angles. Strong military aesthetic with clean neon green glow on pure black. Highly symmetrical.
+      </div>
+      <button class="select-btn">Select This Logo</button>
+    </div>
+
+    <div class="logo-card" data-logo="2" onclick="select(2)">
+      <div class="logo-info">
+        <div class="logo-number">Refined #2</div>
+        <div class="resolution">1024×1024 HD</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="refined-2.jpg" alt="Refined Logo 2">
+      </div>
+      <div class="description">
+        Modern esports emblem with sharp vector lines. Premium gaming aesthetic. Battle-ready composition with strong contrast.
+      </div>
+      <button class="select-btn">Select This Logo</button>
+    </div>
+
+    <div class="logo-card" data-logo="3" onclick="select(3)">
+      <div class="logo-info">
+        <div class="logo-number">Refined #3</div>
+        <div class="resolution">1024×1024 HD</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="refined-3.jpg" alt="Refined Logo 3">
+      </div>
+      <div class="description">
+        Tactical badge with crossed weapon elements. Ultra-sharp geometric design. Perfect OLED optimization with glowing edges.
+      </div>
+      <button class="select-btn">Select This Logo</button>
+    </div>
+
+    <div class="logo-card" data-logo="4" onclick="select(4)">
+      <div class="logo-info">
+        <div class="logo-number">Refined #4</div>
+        <div class="resolution">1024×1024 HD</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="refined-4.jpg" alt="Refined Logo 4">
+      </div>
+      <div class="description">
+        Aggressive angular shield with military precision. High contrast neon glow. Professional gaming tournament quality.
+      </div>
+      <button class="select-btn">Select This Logo</button>
+    </div>
+  </div>
+
+  <div class="actions">
+    <h2>Ready to Finalize?</h2>
+    <p>Select your favorite logo above, then export it to all required iOS/Android sizes</p>
+    <div class="action-btns">
+      <button class="action-btn export" onclick="exportSizes()">Export All App Icon Sizes</button>
+      <button class="action-btn more" onclick="generateMore()">Generate More Variations</button>
+    </div>
+  </div>
+
+  <script>
+    let selectedLogo = null;
+
+    function select(num) {
+      // Remove previous selection
+      document.querySelectorAll('.logo-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+
+      // Add selection
+      const card = document.querySelector(`[data-logo="${num}"]`);
+      card.classList.add('selected');
+      selectedLogo = num;
+
+      console.log(`Selected: Refined #${num}`);
+      console.log(`File: refined-${num}.jpg`);
+    }
+
+    function exportSizes() {
+      if (!selectedLogo) {
+        alert('Please select a logo first!');
+        return;
+      }
+
+      alert(`Exporting Refined #${selectedLogo} to all sizes:\n\n` +
+            `iOS:\n` +
+            `- 1024×1024 (App Store)\n` +
+            `- 180×180 (iPhone 3x)\n` +
+            `- 120×120 (iPhone 2x)\n` +
+            `- 60×60 (Settings)\n\n` +
+            `Android:\n` +
+            `- 512×512 (Play Store)\n` +
+            `- Adaptive icon layers\n\n` +
+            `Next: Update app.json with new icon path`);
+    }
+
+    function generateMore() {
+      alert('Generate more variations?\n\n' +
+            '1. Same style, different compositions\n' +
+            '2. Different color schemes\n' +
+            '3. Alternative badge shapes\n' +
+            '4. More aggressive angles\n\n' +
+            'Which direction?');
+    }
+  </script>
+</body>
+</html>

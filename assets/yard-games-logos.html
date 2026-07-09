@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yard Wars - Yard Games Themed Logos (CORRECT)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      padding: 40px;
+    }
+    .alert {
+      background: linear-gradient(135deg, #1a0000 0%, #330000 100%);
+      border: 4px solid #FF0044;
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 60px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .alert h2 {
+      font-size: 42px;
+      color: #FF0044;
+      margin-bottom: 20px;
+    }
+    .alert p {
+      font-size: 20px;
+      color: #ccc;
+      line-height: 1.8;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding-bottom: 30px;
+      border-bottom: 4px solid #00FF00;
+    }
+    .header h1 {
+      font-size: 96px;
+      color: #00FF00;
+      text-shadow: 0 0 60px rgba(0, 255, 0, 0.8);
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+    .header .badge {
+      display: inline-block;
+      padding: 15px 40px;
+      background: #00FF00;
+      color: #000;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+    .header p {
+      font-size: 20px;
+      color: #00FF00;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 1800px;
+      margin: 0 auto 80px;
+    }
+    .logo-card {
+      background: linear-gradient(135deg, #0a0a0a 0%, #001a00 100%);
+      border: 4px solid #00FF00;
+      border-radius: 25px;
+      padding: 40px;
+      transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+    .logo-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 30px 80px rgba(0, 255, 0, 0.5);
+      border-width: 6px;
+    }
+    .logo-card.selected {
+      border-color: #FF0044;
+      border-width: 6px;
+      background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%);
+    }
+    .logo-card.selected::before {
+      content: "✓ FINAL CHOICE";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #FF0044;
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .image-wrapper {
+      background: #000;
+      border-radius: 20px;
+      padding: 60px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    .logo-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      display: block;
+    }
+    .logo-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logo-number {
+      font-size: 42px;
+      font-weight: 900;
+      color: #00FF00;
+    }
+    .resolution {
+      font-size: 16px;
+      color: #00FFFF;
+      font-family: 'Courier New', monospace;
+      padding: 8px 16px;
+      background: #0a0a0a;
+      border-radius: 8px;
+      border: 2px solid #00FFFF;
+    }
+    .description {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #999;
+      margin-bottom: 25px;
+    }
+    .select-btn {
+      width: 100%;
+      padding: 20px;
+      background: #00FF00;
+      color: #000;
+      border: none;
+      border-radius: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .select-btn:hover {
+      background: #00FFFF;
+      transform: scale(1.05);
+    }
+    .logo-card.selected .select-btn {
+      background: #FF0044;
+      color: #fff;
+    }
+    .actions {
+      text-align: center;
+      padding: 80px 40px;
+      background: linear-gradient(135deg, #001a00 0%, #0a0a0a 100%);
+      border: 4px solid #00FF00;
+      border-radius: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .actions h2 {
+      font-size: 56px;
+      color: #00FF00;
+      margin-bottom: 20px;
+    }
+    .actions p {
+      font-size: 20px;
+      color: #999;
+      margin-bottom: 40px;
+    }
+    .action-btns {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .action-btn {
+      padding: 25px 60px;
+      font-size: 22px;
+      font-weight: bold;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .action-btn.export {
+      background: #00FF00;
+      color: #000;
+    }
+    .action-btn.export:hover {
+      background: #00FFFF;
+      transform: scale(1.1);
+    }
+    .action-btn.more {
+      background: #1a1a1a;
+      color: #00FF00;
+      border: 4px solid #00FF00;
+    }
+    .action-btn.more:hover {
+      background: #00FF00;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="alert">
+    <h2>✓ Corrected: Yard Games Theme</h2>
+    <p>
+      These logos feature <strong>DISC GOLF BASKETS</strong> and <strong>YARD GAME EQUIPMENT</strong> -
+      no weapons or military symbols. This is about outdoor recreational sports: disc golf, cornhole, horseshoes, etc.
+    </p>
+  </div>
+
+  <div class="header">
+    <h1>YARD WARS</h1>
+    <div class="badge">Yard Games Logos • 1024×1024 HD</div>
+    <p>Disc Golf Baskets • Cornhole • Yard Games Equipment</p>
+  </div>
+
+  <div class="gallery">
+    <div class="logo-card" data-logo="1" onclick="select(1)">
+      <div class="logo-info">
+        <div class="logo-number">Yard Games #1</div>
+        <div class="resolution">1024×1024 HD</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="yard-games-1.jpg" alt="Yard Games Logo 1">
+      </div>
+      <div class="description">
+        Geometric shield with disc golf basket center. Clean sports equipment design. Perfect for outdoor recreational games.
+      </div>
+      <button class="select-btn">Select This Logo</button>
+    </div>
+
+    <div class="logo-card" data-logo="2" onclick="select(2)">
+      <div class="logo-info">
+        <div class="logo-number">Yard Games #2</div>
+        <div class="resolution">1024×1024 HD</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="yard-games-2.jpg" alt="Yard Games Logo 2">
+      </div>
+      <div class="description">
+        Sports badge with yard game elements. Tactical shield shape but recreational theme. Neon green on black OLED optimized.
+      </div>
+      <button class="select-btn">Select This Logo</button>
+    </div>
+
+    <div class="logo-card" data-logo="3" onclick="select(3)">
+      <div class="logo-info">
+        <div class="logo-number">Yard Games #3</div>
+        <div class="resolution">1024×1024 HD</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="yard-games-3.jpg" alt="Yard Games Logo 3">
+      </div>
+      <div class="description">
+        Disc golf basket featured prominently. Crossed disc and cornhole board. Sharp geometric design for competitive yard games.
+      </div>
+      <button class="select-btn">Select This Logo</button>
+    </div>
+
+    <div class="logo-card" data-logo="4" onclick="select(4)">
+      <div class="logo-info">
+        <div class="logo-number">Yard Games #4</div>
+        <div class="resolution">1024×1024 HD</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="yard-games-4.jpg" alt="Yard Games Logo 4">
+      </div>
+      <div class="description">
+        Premium yard games emblem. High contrast shield badge with sports equipment. Competitive but recreational vibe.
+      </div>
+      <button class="select-btn">Select This Logo</button>
+    </div>
+  </div>
+
+  <div class="actions">
+    <h2>Choose Your Final Logo</h2>
+    <p>Select your favorite, then export to all iOS/Android sizes</p>
+    <div class="action-btns">
+      <button class="action-btn export" onclick="exportSizes()">Export All App Icon Sizes</button>
+      <button class="action-btn more" onclick="generateMore()">Generate More Variations</button>
+    </div>
+  </div>
+
+  <script>
+    let selectedLogo = null;
+
+    function select(num) {
+      document.querySelectorAll('.logo-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+
+      const card = document.querySelector(`[data-logo="${num}"]`);
+      card.classList.add('selected');
+      selectedLogo = num;
+
+      console.log(`Selected: Yard Games #${num}`);
+      console.log(`File: yard-games-${num}.jpg`);
+    }
+
+    function exportSizes() {
+      if (!selectedLogo) {
+        alert('Please select a logo first!');
+        return;
+      }
+
+      alert(`✓ Exporting Yard Games #${selectedLogo} to all sizes:\n\n` +
+            `iOS App Store:\n` +
+            `- 1024×1024 (App Store submission)\n` +
+            `- 180×180 (iPhone @3x)\n` +
+            `- 120×120 (iPhone @2x)\n` +
+            `- 60×60 (Settings @2x)\n\n` +
+            `Android Play Store:\n` +
+            `- 512×512 (Play Store)\n` +
+            `- Adaptive icon foreground/background\n\n` +
+            `Ready to update app.json!`);
+    }
+
+    function generateMore() {
+      alert('Generate more yard games themed variations?\n\n' +
+            '✓ Disc golf basket center\n' +
+            '✓ Cornhole boards\n' +
+            '✓ Horseshoe elements\n' +
+            '✓ Sports equipment only\n' +
+            '✗ No weapons/combat themes\n\n' +
+            'Continue with this direction?');
+    }
+  </script>
+</body>
+</html>
